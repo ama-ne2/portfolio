@@ -1,0 +1,51 @@
+@mixin titleColor($value: 10px, $color: #000) {
+    color: $color;
+    font-size: 1.8rem;
+    padding: $value;
+    margin: $value;
+}
+
+@mixin wrap($gap: 20px) {
+    display: flex;
+    gap: $gap;
+}
+
+@mixin evenChild {
+    &:nth-child(even) {
+        @content;
+    }
+}
+
+@mixin oddChild {
+    &:nth-child(odd) {
+        @content;
+    }
+}
+
+@mixin tagColor($color) {
+    color: $color;
+    border: solid 1px $color;
+}
+
+@mixin tag($flex: center) {
+    color: #999;
+    display: flex;
+    justify-content: $flex;
+    align-items: $flex;
+
+    a {
+        padding: 0.4rem 1rem;
+        width: 100%;
+        line-height: 1;
+        transition: 0.3s;
+        border-radius: 4px;
+    }
+
+
+}
+
+@mixin dateTag($date) {
+    &[date-tag="#{$date}"]>a {
+        @content;
+    }
+}

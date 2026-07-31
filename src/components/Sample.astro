@@ -1,0 +1,109 @@
+---
+import { Image } from "astro:assets";
+import thumbNoImage from "../assets/sample05_noimage.jpg";
+const { title, description, tag, pageURL } = Astro.props;
+---
+
+<style lang="scss">
+    .thumb {
+        &__image {
+            display: block;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            img {
+                border-radius: 8px;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+                display: block;
+                transition: opacity 0.3s;
+                &:hover {
+                    cursor: pointer;
+                    opacity: 0.7;
+                }
+            }
+        }
+        &__body {
+            display: grid;
+            h3 {
+                font-size: 1.6rem;
+            }
+            p {
+                font-size: 1.2rem;
+                margin-top: 1rem;
+            }
+        }
+        &__link {
+            margin-top: 1rem;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        &__tags {
+            margin: 16px 0;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        &__tag {
+            @include mixin.tag();
+
+            @include mixin.dateTag(astro) {
+                @include mixin.tagColor(var.$color-astro);
+                // @include mixin.tagHover{
+                //     color: #FFF;
+                //     text-decoration: none;
+                //     background-color:  var.$color-astro;
+                // }
+            }
+            &[data-tag="astro"] > a {
+                @include mixin.tagColor(var.$color-astro);
+                border: solid 1px var.$color-astro;
+                &:hover {
+                    color: #fff;
+                    text-decoration: none;
+                    background-color: var.$color-astro;
+                }
+            }
+            &[data-tag="sass"] > a {
+                @include mixin.tagColor(var.$color-sass);
+                border: solid 1px var.$color-sass;
+                &:hover {
+                    color: #fff;
+                    text-decoration: none;
+                    background-color: var.$color-sass;
+                }
+            }
+            &[data-tag="js"] > a {
+                @include mixin.tagColor(var.$color-js);
+                border: solid 1px var.$color-js;
+                &:hover {
+                    color: #fff;
+                    text-decoration: none;
+                    background-color: var.$color-js;
+                }
+            }
+        }
+    }
+</style>
+
+<article class="thumb">
+    <a href=`${pageURL}`>
+        <picture class="thumb__image">
+            <Image src={thumbNoImage} alt="No Image" />
+        </picture>
+    </a>
+    <div class="thumb__body">
+        <a href=`${pageURL}` class="thumb__link">
+            <h3>{title}</h3>
+            <p>{description}</p>
+        </a>
+        <div class="thumb__tags">
+            <span class="thumb__tag" data-tag=`${tag}`
+                ><a href="">{tag}</a></span
+            >
+            <!-- <span class="thumb__tag" data-tag="sass"><a href="">Sass</a></span>
+            <span class="thumb__tag" data-tag="js"><a href="">Js</a></span> -->
+        </div>
+    </div>
+</article>

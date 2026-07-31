@@ -1,0 +1,10 @@
+@use "sass:color";
+$sample_s02-base-color: #2932bc;
+
+$color-astro: #e60076;
+$color-sass: #00a6f4;
+$color-js: #ff8903;
+$link-color: #333;
+$link-color-hover: color.adjust($link-color, $lightness: +50%);
+$input-error-color: #B53939;
+$main-color: #395DEA;

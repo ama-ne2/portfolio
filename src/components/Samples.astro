@@ -1,0 +1,19 @@
+---
+// import { Image } from "astro:assets";
+// import thumbNoImage from "../assets/sample05_noimage.jpg";
+import Sample from "../components/Sample.astro";
+import { samples } from "../scripts/sample_date";
+---
+
+{
+    samples.map((sample) => (
+        // <Sample
+        //     title={sample.title}
+        //     description={sample.description}
+        //     tag={sample.tag}
+        //     pageURL={sample.pageURL}
+        // />
+        <Sample {...sample} />
+    ))
+};
+

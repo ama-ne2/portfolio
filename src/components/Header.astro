@@ -1,0 +1,95 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../assets/logo.svg";
+const { pathname } = Astro.url;
+function isActive(url: string) {
+    // return pathname === url ? "active" :"";
+    //ルートパス（トップページ）かどうかの確認
+    console.log(pathname, url);
+    if (url === "/") {
+        console.log("home");
+        return pathname === "/" ? "active" : "";
+    }
+
+    //ルートパス（トップページ）以外の場合は、startsWithを使って先頭のパスを返すように変更
+    return pathname.startsWith(url) ? "active" : "";
+}
+---
+
+<style lang="scss">
+    header {
+        display: flex;
+        padding: 22px 22px 20px 24px;
+        flex-direction: column;
+        border-bottom: solid 1px #dedede;
+        // gap: 0px;
+        h1 {
+            font-size: 2.4rem;
+            width: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                width: 100%;
+            }
+        }
+        nav {
+            ul {
+                display: flex;
+                flex-direction: row;
+                gap: 2rem;
+                li {
+                    a {
+                        text-decoration: none;
+                        position: relative;
+                        display: block;
+                        overflow: hidden;
+                        // border:  1px solid #333;
+                        &::after {
+                            position: absolute;
+                            content: "";
+                            display: block;
+                            left: -100%;
+                            bottom: 0;
+                            width: 100%;
+                            height: 1px;
+                            background-color: #bbb;
+                            transition: 0.2s;
+                        }
+                        &:hover {
+                            text-decoration: none;
+                            &::after {
+                                left: 0;
+                            }
+                        }
+                        &.active {
+                            border-bottom: solid 1px #333;
+                        }
+                    }
+                }
+            }
+        }
+    }
+</style>
+<header>
+    <h1>
+        <a href="/">
+            <Image src={Logo} alt="WD DESIGN" />
+        </a>
+    </h1>
+    <nav>
+        <ul>
+            <li><a href="/" class={isActive("/")}>HOME</a></li>
+            <li>
+                <a href="/welcome/" class={isActive("/welcome/")}>WELCOME</a>
+            </li>
+            <li><a href="/about/" class={isActive("/about/")}>ABOUT</a></li>
+            <li>
+                <a href="/samples/" class={isActive("/samples/")}>SAMPLES</a>
+            </li>
+            <li>
+                <a href="/contact/" class={isActive("/contact/")}>CONTACT</a>
+            </li>
+        </ul>
+    </nav>
+</header>
